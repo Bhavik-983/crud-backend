@@ -13,7 +13,7 @@ router.post("/create",
     authorize(constant.ROLE[0]),
     check("title").notEmpty().withMessage("Title is required"),
     check("description").notEmpty().withMessage("Description is required"),
-    check("fk_userId").notEmpty().withMessage("User ID is required").isMongoId().withMessage("Invalid user ID"),
+    check("fk_user_id").notEmpty().withMessage("User ID is required").isMongoId().withMessage("Invalid user ID"),
     fieldValidator,
     createTask
 )

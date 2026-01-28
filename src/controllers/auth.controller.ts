@@ -16,7 +16,7 @@ export const login = async (req: any, res: any) => {
 
         const token = jwt.sign({ _id: user._id }, dotenv.ACCESS_TOKEN_SEC as string, { expiresIn: "1d" });
 
-        return res.status(200).json({ message: "Login successful", token });
+        return res.status(200).json({ message: "Login successful", token, role: user.role });
 
     } catch (e) {
         console.log(e, "ERROR IN LOGIN")

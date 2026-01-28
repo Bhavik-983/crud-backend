@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import { UserModel } from "../models/user.model.js";
+import dotenv from "../config/dotenv.js"
 
 export interface AuthRequest extends Request {
   user?: any;
@@ -17,7 +18,7 @@ export const authenticate = async (
   if (!token) return res.status(401).json({ message: "Unauthorized" });
     const decoded = jwt.verify(
       token,
-      process.env.JWT_SECRET as string
+      dotenv.ACCESS_TOKEN_SEC
     );
 
     if(!decoded || typeof decoded === 'string' || !decoded._id) return res.status(401).json({ message: "Unauthorized" });
