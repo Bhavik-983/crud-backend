@@ -10,14 +10,14 @@ import constant from "../utils/constant.js";
 export const createTask = async (req: AuthRequest, res: Response) => {
     try {
 
-        const { title, assigned_to } = req.body;
+        const { title, fk_user_id } = req.body;
 
         const task = await TaskModel.create({
             title,
-            fk_user_id: assigned_to,
+            fk_user_id,
         });
 
-        io.to(assigned_to.toString()).emit("task:assigned", task);
+        io.to(fk_user_id.toString()).emit("task:assigned", task);
 
         res.status(201).json({ message: "Task created successfully" });
     } catch (e) {
