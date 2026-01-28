@@ -14,7 +14,7 @@ export const login = async (req: any, res: any) => {
         if (!compare_password) return res.status(401).json({ message: "Invalid password" });
 
 
-        const token = jwt.sign({ _id: user._id }, dotenv.ACCESS_TOKEN_SEC as string, { expiresIn: Number(dotenv.EXP_TIME) });
+        const token = jwt.sign({ _id: user._id }, dotenv.ACCESS_TOKEN_SEC as string, { expiresIn: "1d" });
 
         return res.status(200).json({ message: "Login successful", token });
 
